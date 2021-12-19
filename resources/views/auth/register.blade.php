@@ -75,6 +75,30 @@
                             </div>
                         </div>
 
+                        <fieldset class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Wybierz rolę') }}</label>
+                            <div class="col-md-6">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" id="it_worker_radio" value="it_worker" >
+                                <label class="form-check-label" for="it_worker_radio">
+                                  {{ __('Pracownik') }}
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" id="employer_radio" value="employer" >
+                                <label class="form-check-label" for="employer_radio">
+                                  {{ __('Pracodawca') }}
+                                </label>
+                              </div>
+
+                              @error('user_role')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                        </fieldset>
+                        
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -16,9 +16,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/job.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -31,7 +33,7 @@
                 </a>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" class="ml-auto" href="#">Oferty Pracy</a>
+                        <a class="nav-link" class="ml-auto" href="/users/list">Oferty Pracy</a>
                     </li>
 
                     <li class="nav-item">
@@ -92,6 +94,10 @@
         </nav>
 
         <main class="py-4">
+            <div class="row justify-content-center">
+                <button type="button" class="btn-lg btn-primary m-5">Szukaj pracy</button>
+                <button type="button" class="btn-lg btn-primary m-5">Znajdź pracownika</button>
+            </div>
             @yield('content')
         </main>
     </div>

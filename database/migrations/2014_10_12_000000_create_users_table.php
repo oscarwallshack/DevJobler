@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateUsersTableZABEZPIECZENIE extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable(); 
+            $table->string('role')->nullable(); //pracodawca / pracownik
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -25,12 +27,7 @@ class CreateUsersTable extends Migration
     }
 
     /**
-     * Pola do dodania w bazie:
-     * 1. status: pracownik/pracodawca
-     * 2. zdjęcie
-     * 3. opis
-     * 4. miejsce na plik
-     * 5. zarobki
+     *
      * https://www.devopsschool.com/blog/how-to-add-a-column-or-columns-to-an-existing-table-using-migration-in-laravel/
      * Reverse the migrations.
      *
