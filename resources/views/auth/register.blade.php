@@ -79,7 +79,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Wybierz rolę') }}</label>
                             <div class="col-md-6">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="user_role" id="it_worker_radio" value="it_worker" >
+                                <input class="form-check-input" type="radio" name="user_role" id="it_worker_radio" value="employee" >
                                 <label class="form-check-label" for="it_worker_radio">
                                   {{ __('Pracownik') }}
                                 </label>

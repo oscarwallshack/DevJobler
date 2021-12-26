@@ -33,11 +33,11 @@
                 </a>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" class="ml-auto" href="/users/list">Oferty Pracy</a>
+                        <a class="nav-link" class="ml-auto" href="/users/list">Users</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link"  href="#">Profile pracowników</a>
+                        <a class="nav-link"  href="/znajdz-pracownika">Znajdź pracownika</a>
                     </li>
                 </ul>
 
@@ -74,8 +74,10 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                                <!--######## MENU WIDOCZNE PO ZALOGOWANIU ######## -->
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('employees.index')}}">Profil</a>
+                                    <a class="dropdown-item" href="{{route('employees.edit', Auth::user()->id)}}">Edytuj profil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                                                  document.getElementById('logout-form').submit();">
@@ -94,10 +96,6 @@
         </nav>
 
         <main class="py-4">
-            <div class="row justify-content-center">
-                <button type="button" class="btn-lg btn-primary m-5">Szukaj pracy</button>
-                <button type="button" class="btn-lg btn-primary m-5">Znajdź pracownika</button>
-            </div>
             @yield('content')
         </main>
     </div>

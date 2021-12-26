@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    
+    <div class="row justify-content-center">
+        <button type="button" class="btn-lg btn-primary m-5">Szukaj pracy</button>
+        <button type="button" class="btn-lg btn-primary m-5">Znajdź pracownika</button>
+    </div>
     <div class="job result-body">
         <div class="table-responsive">
             <table class="table widget-26">
@@ -15,7 +18,7 @@
                         </td>
                         <td>
                             <div class="widget-26-job-title">
-                                <a href="#">Senior Software Engineer / Developer</a>
+                                <a href="#">Senioritas Software Engineer / Developer</a>
                                 <p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>
                             </div>
                         </td>
@@ -90,6 +93,10 @@
                             </div>
                         </td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
                         
 </div>
 @endsection

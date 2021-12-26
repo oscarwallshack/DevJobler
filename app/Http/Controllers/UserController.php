@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Employee;
 use App\Models\User;
+use App\Http\Requests\UpdateUserRequest;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        return view('users.users', [
-            'users' => User::all()
+        return view('users.index', [
+            'users' => User::paginate(3)
         ]);
     }
 
@@ -55,24 +59,39 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return View
      */
-    public function edit($id)
+    public function editEmployese(User $user): View
     {
-        //
+        return view('employees.edit', [
+            'user' => $user
+        ]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  UpdateUserRequest  $request
+     * @param  User  $user
+     * @param  Employee  $employee
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+        
+        $employee = $user->employee;
+        $employee->fill($validated);
+        $user->name = $validated['employee_name'];
+        $user->surname = $validated['employee_surname'];
+        $user->email = $validated['employee_email'];
+
+
+        //$user->employee()->save(new Employee($validated));
+        $user->employee()->save($employee);
+        $user->save();
+        return redirect()->route('employees.index');
     }
 
     /**
