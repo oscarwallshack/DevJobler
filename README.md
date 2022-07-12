@@ -1,4 +1,4 @@
-Projekt portalu internetowego, pośredniczącego na rynku pracy między pracodawcami a specjalistami IT, a także jego implementacja w skryptowym języku programowania PHP. Serwis ma na celu podniesienie wydajność w procesie poszukiwania pracowników i pracy przez internet. 
+Projekt portalu internetowego, pośredniczącego na rynku pracy między pracodawcami a specjalistami IT, a także jego implementacja w skryptowym języku programowania PHP. 
 
 Wymagania funkcjonalne:
 - możliwość stworzenia profilu firmowego lub specjalisty IT
