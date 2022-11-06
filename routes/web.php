@@ -65,21 +65,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ----------- routes for company -----------
 
     Route::middleware(['can:isCompany'])->group(function () {
-        Route::get(
-            '/profil-firmowy',
-            [CompanyController::class, 'index']
-        )->name('companies.index');
+        Route::get('/profil-firmowy', [CompanyController::class, 'index'])->name('companies.index');
 
-        Route::get(
-            '/profil-firmowy/edytuj/',
-            [CompanyController::class, 'edit']
-        )->name('companies.edit');
+        Route::get('/profil-firmowy/edytuj/', [CompanyController::class, 'edit'])->name('companies.edit');
 
         Route::match(
             ['POST', 'PUT'],
             '/profil-firmowy/edytuj/{id}/zaktualizuj',
             [UserController::class, 'updateCompany']
-        )->name('users.updateCompany'); 
+        )->name('users.updateCompany');
 
         Route::delete(
             '/profil-firmowy/{user}',
