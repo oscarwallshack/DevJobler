@@ -1,102 +1,81 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <button type="button" class="btn-lg btn-primary m-5">Szukaj pracy</button>
-        <button type="button" class="btn-lg btn-primary m-5">Znajdź pracownika</button>
-    </div>
-    <div class="job result-body">
-        <div class="table-responsive">
-            <table class="table widget-26">
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="widget-26-job-emp-img">
-                                <img src="https://www.bootdey.com/app/webroot/img/Content/user_1.jpg" alt="Company" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-title">
-                                <a href="#">Senioritas Software Engineer / Developer</a>
-                                <p class="m-0"><a href="#" class="employer-name">Axiom Corp.</a> <span class="text-muted time">1 days ago</span></p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-info">
-                                <p class="type m-0">Full-Time</p>
-                                <p class="text-muted m-0">in <span class="location">London, UK</span></p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-salary">6500 zł</div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-category bg-soft-base">
-                                <i class="indicator bg-base"></i>
-                                <span>Software Development</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-starred">
-                                    <button type="button" class="btn btn-success">Aplikuj</button>
-                            </div>
-                        </td>
-                    </tr>   
+    <div class="container">
+        <section class="header header-home">
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-2 mx-auto text-center bg-image"
+                style="background-image: url('public\storage\img\header_background.png');">
+                <h1 class="display-5">Realizuj projekty i spełniaj się zawodowo z DevJobler</h1>
+                <h2 class="lead">Przeglądaj profile specjalistów IT lub znajdź swoją przyszłą prace</h2>
+            </div>
+            <div class="row justify-content-center pb-md-5">
+                <button type="button" class="btn-lg btn-primary m-5"><a href="/firmy-it">Firmy IT </a> </button>
+                <button type="button" class="btn-lg btn-primary m-5"><a href="/specjalisci-it">Specjaliści IT </a>
+                </button>
+            </div>
+        </section>
+        <div class="job result-body">
+            {{-- @if (!is_null($offers))
+                <h3 class="row justify-content-center pb-md-5 ">Obecnie nie ma żadnych ofert do wyświetlenia</h3>
+            @endif --}}
+            @foreach ($offers as $offer)
+                <div class="card card-body mt-3 ">
+                    <div
+                        class="media align-items-center align-items-lg-start d-flex justify-content-between text-lg-left flex-column flex-lg-row flex-sm-nowrap">
+                        <div class="mr-2 mb-3 mb-lg-0 row justify-content-sm-center">
+                            @if (!is_null($offer->offer_img_src))
+                                <img src="https://www.bootdey.com/app/webroot/img/Content/user_1.jpg" width="65" height="65"
+                                    alt="Zdjęcie ofertowe">
+                            @else
+                                <img class="d-sm-none d-lg-inline" src="{{ asset('storage/' . $offer->offer_image_src) }}" width="100" height="100" 
+                                    alt="Zdjęcie ofertowe" />
+                                    <img class="d-lg-none" src="{{ asset('storage/' . $offer->offer_image_src) }}" width="auto" height="150" />
+                            @endif
 
+                            <span class="column ml-2 text-lg-left text-sm-center text-md-left">
+                                <h5><a href="{{ route('offers.offer', $offer->id) }}">{{ $offer->offer_name }}</a></h5>
+                                <p class="m-0"><a href="{{ route('offers.offer', $offer->id) }}"><i
+                                            class="far fa-building"></i>
+                                        {{ $offer->offer_company }}</a> </p>
 
-                    <tr>
-                        <td>
-                            <div class="widget-26-job-emp-img">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Company" />
+                                <div class="m-0 row text-lg-left justify-content-sm-center text-md-left">
+                                    <span class="m-1 text-muted time">Dodano
+                                        {{ $offer->created_at->format('d.m.Y') }}</span>
+
+                                    <p class="m-1 type"><img class=" m-1"
+                                            src="{{ asset('storage/icons/contract.png') }} " width="15" height="15"
+                                            alt="contract">{{ $offer->offer_type }}</p>
+
+                                    <p class="m-1">
+                                        <span class="text-muted time"><img class=" m-1"
+                                                src="{{ asset('storage/icons/req.png') }} " width="15" height="15"
+                                                alt="contract">Rekrutacja
+                                            {{ $offer->offer_recruitment_method }}</span>
+                                    </p>
+                                    <p class=" rounded-pill ml-3 p-1 text-muted bg-soft-danger"><i
+                                            class="fas fa-map-marker-alt"></i><b> Praca
+                                            {{ $offer->offer_working_place }}</b></p>
+                                </div>
+                            </span>
+                        </div>
+
+                        <span class="column">
+                            <div class="mr-2 mt-3 row align-items-center">
+                                <h3 class="font-weight-semibold text-success mr-4">
+                                    {{ $offer->offer_salary_min . ' - ' . $offer->offer_salary_max }} PLN</h3>
                             </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-title">
-                                <a href="#">Marketing &amp; Communication Supervisor</a>
-                                <p class="m-0"><a href="#" class="employer-name">AxiomUI Llc.</a> <span class="text-muted time">2 days ago</span></p>
+                            <div class=" widget-26-job-category ">
+                                @foreach (array_slice($array = explode(' ', $offer->offer_requirements), 0, 5) as $skill)
+                                    <span class="rounded-pill bg-soft-info p-1">{{ $skill }}</span>
+
+                                @endforeach
                             </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-info">
-                                <p class="type m-0">Part-Time</p>
-                                <p class="text-muted m-0">in <span class="location">New York, US</span></p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-salary">$ 60/hr</div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-category bg-soft-warning">
-                                <i class="indicator bg-warning"></i>
-                                <span>Marketing</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="widget-26-job-starred">
-                                <a href="#">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-star"
-                                    >
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                    </svg>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </span>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
+
     </div>
-                        
-</div>
 @endsection

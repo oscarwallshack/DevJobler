@@ -7,22 +7,31 @@ use App\Models\User;
 use Carbon\Factory;
 use Illuminate\Console\Application;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
-
-class EmployeeController extends Controller 
-
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function s()
+    public function show(): View
     {
-        //
+        return view('itSpecialists', [
+            'employees' => Employee::paginate(10)
+        ]);
     }
-
+    /**
+     * Display a listing of the resource.
+     * @param  Employee  $employee
+     *
+     * @return View
+     */
+    public function profile($id): View
+    {
+        $employee = Employee::find($id);
+        return view('profile', compact('employee'));
+    }
     /**
      * Display a listing of the resource.
      * @return View
@@ -32,17 +41,14 @@ class EmployeeController extends Controller
         return view('employees.profil');
     }
 
-      /**
+    /**
      * Display a listing of the resource.
      * @return View
      */
-    public function edit(User $user): View
+    public function edit(): View
     {
-        return view('employees.edit',[
-            'user' => $user
-        ]);
+        return view('employees.edit');
     }
-    
 
-//   Tylko widoki 
+    
 }

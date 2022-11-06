@@ -15,16 +15,20 @@ class Employee extends Model
         'employee_surname',
         'employee_email',
         'employee_tel_num',
-        'employee_adress',
+        'employee_address',
+        'employee_cv',
         'employee_description',
+        'employee_image_src',
         'employee_status',
         'employee_education',
+        'employee_skills',
         'user_id',
     ];
 
     //powiązanie użytkownika z pracownika
-    
-    public function user(): BelongsTo{
+
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 }

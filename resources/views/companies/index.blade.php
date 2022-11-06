@@ -20,25 +20,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($workers as $worker)
+            @foreach($employees as $employee)
             <tr>
-                <th scope="row">{{$worker->id}}</th>
-                <td>{{$worker->worker_name}}</td>
-                <td>{{$worker->worker_surname}}</td>
-                <td>{{$worker->worker_email}}</td>
-                <td>{{$worker->worker_tel_num}}</td>
-                <td>{{$worker->worker_adress}}</td>
-                <td>{{$worker->worker_description}}</td>
-                <td>{{$worker->worker_img_src}}</td>
-                <td>{{$worker->work_status}}</td>
-                <td>{{$worker->worker_education}}</td>
+                <th scope="row">{{$employee->id}}</th>
+                <td>{{$employee->employee_name}}</td>
+                <td>{{$employee->employee_surname}}</td>
+                <td>{{$employee->employee_email}}</td>
+                <td>{{$employee->employee_tel_num}}</td>
+                <td>{{$employee->employee_address}}</td>
+                <td>{{$employee->employee_description}}</td>
+                <td>{{$employee->employee_img_src}}</td>
+                <td>{{$employee->employee_status}}</td>
+                <td>{{$employee->employee_education}}</td>
 
                 <td>-</td>
             </tr>
             @endforeach
         <tbody>
     </table>
-    {{ $workers->links()}}
+    {{ $employees->links()}}
 </div>
 
     {{-- <div class="list-group">

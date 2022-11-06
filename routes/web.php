@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
+use App\Models\Offer;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -19,35 +19,108 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/users/list', [UserController::class, 'index']);
+// Route::get('/', function () {
+//     return view('home');
+// });
 
-Route::get('/users/list', [UserController::class, 'index']); // -> middleware('auth');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// ------------------------------employee---------------------------------------
+
+// ##################### open routes #####################
+
+
+
+Route::get('/home', [OfferController::class, 'list'])->name('home');
+Route::get('/', [OfferController::class, 'list'])->name('/');
+
+Route::get('/specjalisci-it', [EmployeeController::class, 'show']);
+
+Route::get('/firmy-it', [CompanyController::class, 'show']);
+
+
+// ##################### routes for logged users #####################
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-   //  Route::get('/profil-pracownika', [EmployeeController::class, 'profile']); // -> middleware('auth');
-    Route::get('/profil-pracownika/edytuj', [EmployeeController::class, 'edit_profile']);
+    // ----------- routes for all logged users -----------
+
+    Route::get('/specjalisci-it/{id}', [EmployeeController::class, 'profile'])->name('employees.profile');
+    Route::get('/specjalisci-it/{id}/pobierz-cv', [UserController::class, 'downloadCv'])->name('employees.downloadCv');
+
+    Route::get('/firmy-it/{id}', [CompanyController::class, 'profile'])->name('companies.profile');
+
+    Route::get('/oferta/{id}', [OfferController::class, 'offer'])->name('offers.offer');
 
 
-    // Route::resource('employees', EmployeeController::class)->only([
-    //     'profile', 
-    // ]);
-    Route::resource('employees', EmployeeController::class)->only([
-        'profile','index', 'edit',
-    ]);
+    // ----------- routes for employees -----------
 
-    Route::resource('users', UserController::class)->only([
-        'update','index', 'employeeProfile'
-    ]);
-    // Route::resource('users', UserController::class)->only([
-    //     'editEmployee',
-    // ]);
+    Route::middleware(['can:isEmployee'])->group(function () {
+        Route::get('/profil', [EmployeeController::class, 'index'])->name('employees.index');
+        Route::get('/profil/edytuj', [EmployeeController::class, 'edit'])->name('employees.edit');
+        Route::match(['POST', 'PUT'], '/profil/edytuj/{id}/zaktualizuj', [UserController::class, 'updateEmployee'])->name('users.updateEmployee');
+        Route::delete('/profil/{user}', [UserController::class, 'destroy'])->name('employees.destroy');
+    });
+
+    // ----------- routes for company -----------
+
+    Route::middleware(['can:isCompany'])->group(function () {
+        Route::get(
+            '/profil-firmowy',
+            [CompanyController::class, 'index']
+        )->name('companies.index');
+
+        Route::get(
+            '/profil-firmowy/edytuj/',
+            [CompanyController::class, 'edit']
+        )->name('companies.edit');
+
+        Route::match(
+            ['POST', 'PUT'],
+            '/profil-firmowy/edytuj/{id}/zaktualizuj',
+            [UserController::class, 'updateCompany']
+        )->name('users.updateCompany'); 
+
+        Route::delete(
+            '/profil-firmowy/{user}',
+            [UserController::class, 'destroy']
+        )->name('companies.destroy');
+
+
+
+        Route::get(
+            '/profil-firmowy/nowa-oferta',
+            [OfferController::class, 'create']
+        )->name('offers.create');
+
+        Route::get(
+            '/profil-firmowy/aktualne-oferty',
+            [OfferController::class, 'index']
+        )->name('offers.index');
+
+
+        // ----------- routes for offers -----------
+
+        Route::post(
+            '/profil-firmowy/aktualne-oferty',
+            [OfferController::class, 'store']
+        )->name('offers.store');
+
+        Route::get(
+            '/profil-firmowy/oferta/{offer}/edytuj',
+            [OfferController::class, 'edit']
+        )->name('offers.edit');
+
+        Route::post(
+            '/profil-firmowy/aktualne-oferty/{offer}',
+            [OfferController::class, 'update']
+        )->name('offers.update');
+
+        Route::delete(
+            '/profil-firmowy/aktualne-oferty/{offer}',
+            [OfferController::class, 'destroy']
+        )->name('offers.destroy');
+    });
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify' => true]);

@@ -1,0 +1,77 @@
+/* ################## COMPANIES ################## */
+
+
+.company_profiles_container{
+    max-width: 350px;
+}
+
+
+/* ################## EMPLOYEES ################## */
+
+.card_profiles {
+    width: 350px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+    min-height: 500px;
+}
+
+.profile_image img {
+    transition: all 0.5s;
+    border-radius: 50%;
+    border: #a074d4 solid 1px;
+}
+
+.card_profiles:hover .image img {
+    transform: scale(1.1);
+    border: #a074d4 solid 1px;
+    border-radius: 50%;
+}
+
+.btn_profile {
+    height: 200px;
+    width: 190px;
+    border: none;
+}
+
+.profiles_name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.btn_profile1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #6661ba;
+    font-size: 15px
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+

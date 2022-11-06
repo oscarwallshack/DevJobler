@@ -45,10 +45,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 
     //powiązanie pracownika z użytkownikiem 
     public function employee(): HasOne 
     {
         return $this->hasOne(Employee::class);
+    }
+
+    //powiązanie firmy z użytkownikiem 
+   
+    public function company(): HasOne 
+    {
+        return $this->hasOne(Company::class );
     }
 }

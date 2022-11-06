@@ -27,7 +27,7 @@
                 <td>{{$employee->employee_surname}}</td>
                 <td>{{$employee->employee_email}}</td>
                 <td>{{$employee->employee_tel_num}}</td>
-                <td>{{$employee->employee_adress}}</td>
+                <td>{{$employee->employee_address}}</td>
                 <td>{{$employee->employee_description}}</td>
                 <td>{{$employee->employee_img_src}}</td>
                 <td>{{$employee->employee_status}}</td>

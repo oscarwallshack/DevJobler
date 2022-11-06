@@ -3,6 +3,15 @@ main{
     height: 100%;
 }
 
+button a {
+    color: white;
+}
+button a:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+
 /* ############ HEADER BACKGROUND ############ */
 .header:before{
     background: url("/storage/img/logo.png");
@@ -10,12 +19,12 @@ main{
     background-size: contain;
     position: absolute;
     content: "  ";
-    left: -43%;
+    /* left: -43%; */
     z-index: -100;
 }
 .header{
     /* box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%); */
- position: relative;   
+    position: relative;   
 }
 .header-home:before{
     transform: rotate(20deg);
@@ -23,13 +32,13 @@ main{
     height: 333px;
 }
 .header-itSpecialists:before{
-    transform: rotate(-20deg);
+    transform: rotate(340deg);
     width: 297px;
     height: 303px;
 }
 .header-companies:before{
     top: 15%;
-    transform: rotate(-5deg);
+    transform: rotate(350deg);
     width: 297px;
     height: 303px;
 }
@@ -38,3 +47,5 @@ main{
     border: 1px solid #563e7d;
     border-radius: 5px;
 }
+
+
